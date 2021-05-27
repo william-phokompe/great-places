@@ -4,9 +4,15 @@ import {View, Text, StyleSheet} from 'react-native'
 const PlaceDetailsScreen = (props) => {
     return (
         <View>
-            <Text>Places list screen</Text>
+            <Text>PlaceDetailScreen</Text>
         </View>
     );
+}
+
+PlaceDetailsScreen.navigationOptions = navigationData => {
+    return {
+        headerTitle: navigationData.navigation.getParam('placeTitle')
+    }
 }
 
 const styles = StyleSheet.create({
