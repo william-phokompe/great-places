@@ -5,7 +5,7 @@ import * as Permissions from "expo-permissions";
 
 import Colors from "../constants/Colors";
 
-const ImageSelector = () => {
+const ImageSelector = (props) => {
   const [pickedImageUri, setPickedImageUri] = useState();
 
   const cameraPermission = async (_) => {
@@ -24,6 +24,7 @@ const ImageSelector = () => {
     if (!hasCameraPermission) {
       return;
     }
+
     const image = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [16, 9],
@@ -31,6 +32,7 @@ const ImageSelector = () => {
     });
 
     setPickedImageUri(image.uri);
+    props.onImageTake(image.uri);
   };
 
   return (
@@ -54,6 +56,7 @@ const ImageSelector = () => {
 const styles = StyleSheet.create({
   imagePicker: {
     alignItems: "center",
+    marginBottom: 15
   },
   imagePreview: {
     width: "100%",

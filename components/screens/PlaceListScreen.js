@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform, FlatList } from "react-native";
+import { StyleSheet, Platform, FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useSelector } from "react-redux";
 
@@ -20,7 +20,7 @@ const PlaceListScreen = (props) => {
               placeId: itemData.item.id,
             });
           }}
-          image={null}
+          image={itemData.item.image}
           title={itemData.item.title}
           address={null}
         />

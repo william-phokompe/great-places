@@ -17,15 +17,22 @@ import ImageSelector from '../ImageSelector'
 const NewPlaceScreen = (props) => {
   const dispatch = useDispatch();
   const [titleValue, setTitleValue] = useState("");
+  const [selectedImage, setSelectedImage] = useState();
   const titleChangeHandler = (text) => {
     // possible validation
     setTitleValue(text);
   };
 
   const savePlaceHandler = (_) => {
-      dispatch(placesActions.addPlace(titleValue));
+      dispatch(placesActions.addPlace(titleValue, selectedImage));
+      console.log("Selected Image: ", selectedImage)
       props.navigation.goBack();
   };
+
+  const imageTakenHandler = (imagePath) => {
+    console.log("IMAGE PATH")
+    setSelectedImage(imagePath)
+  }
 
   return (
     <ScrollView>
@@ -36,7 +43,7 @@ const NewPlaceScreen = (props) => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
-        <ImageSelector />
+        <ImageSelector onImageTake={imageTakenHandler} />
         <Button
           title="Save Place"
           color={Colors.primary}
