@@ -5,8 +5,7 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  Button,
-  Platform
+  Button
 } from "react-native";
 import { useDispatch } from "react-redux";
 
