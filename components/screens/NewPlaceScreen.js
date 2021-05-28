@@ -6,16 +6,17 @@ import {
   StyleSheet,
   TextInput,
   Button,
+  Platform
 } from "react-native";
 import { useDispatch } from "react-redux";
 
 import Colors from "../../constants/Colors";
 import * as placesActions from "../../store/actions/placesActions";
+import ImageSelector from '../ImageSelector'
 
 const NewPlaceScreen = (props) => {
   const dispatch = useDispatch();
   const [titleValue, setTitleValue] = useState("");
-
   const titleChangeHandler = (text) => {
     // possible validation
     setTitleValue(text);
@@ -35,6 +36,7 @@ const NewPlaceScreen = (props) => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
+        <ImageSelector />
         <Button
           title="Save Place"
           color={Colors.primary}
