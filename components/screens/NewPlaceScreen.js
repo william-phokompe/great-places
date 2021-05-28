@@ -25,12 +25,10 @@ const NewPlaceScreen = (props) => {
 
   const savePlaceHandler = (_) => {
       dispatch(placesActions.addPlace(titleValue, selectedImage));
-      console.log("Selected Image: ", selectedImage)
       props.navigation.goBack();
   };
 
   const imageTakenHandler = (imagePath) => {
-    console.log("IMAGE PATH")
     setSelectedImage(imagePath)
   }
 
