@@ -19,7 +19,7 @@ const ImageSelector = (props) => {
   };
 
   const takeImageHandler = async (_) => {
-    const hasCameraPermission = await cameraPermission();
+    const hasCameraPermission = await cameraPermission().catch(error => console.log(error));
 
     if (!hasCameraPermission) {
       return;
