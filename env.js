@@ -1,6 +1,18 @@
 const vars = {
-    googleApiKey: 'AIzaSyA9VIpbHAuTdmNr-eUHvIOy_5Co6xUPRso'
+    development: {
+        googleApiKey: 'AIzaSyA9VIpbHAuTdmNr-eUHvIOy_5Co6xUPRso'
+    },
+    production: {
+        googleApiKey: ''
+    }
 };
 
-export default vars;
+const getEnvVariables = _ => {
+    if (__DEV__) {
+        return vars.development
+    }
+    return vars.production
+}
+
+export default getEnvVariables;
 
