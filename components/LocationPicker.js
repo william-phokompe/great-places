@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Alert,
   StyleSheet,
+  TouchableOpacity,
 } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -13,7 +14,7 @@ import * as Permissions from "expo-permissions";
 import Colors from "../constants/Colors";
 import MapPreview from "./MapPreview";
 
-const LocationPicker = () => {
+const LocationPicker = (props) => {
   const [pickedLocation, setPickedLoaction] = useState();
   const [isFetching, setIsFetching] = useState(false);
   const locationPermission = async (_) => {
@@ -55,20 +56,31 @@ const LocationPicker = () => {
     }
   };
 
+  const selectOnMapHandler = _ => {
+    props.navigation.navigate("Map")
+  }
+
   return (
     <View style={styles.locationPicker}>
-      <MapPreview style={styles.mapPreview} location={pickedLocation}>
+      <MapPreview style={styles.mapPreview} location={pickedLocation} onTouch={selectOnMapHandler}>
         {isFetching ? (
           <ActivityIndicator size="large" color={Colors.primary} />
         ) : (
           <Text>No Location Selected</Text>
         )}
       </MapPreview>
-      <Button
-        title="Set Location"
-        color={Colors.primary}
-        onPress={getLocationHandler}
-      />
+      <View style={styles.actions}>
+        <Button
+          title="Select On Map"
+          color={Colors.primary}
+          onPress={selectOnMapHandler}
+        />
+        <Button
+          title="Set Location"
+          color={Colors.primary}
+          onPress={getLocationHandler}
+        />
+      </View>
     </View>
   );
 };
@@ -85,6 +97,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
   },
 });
 

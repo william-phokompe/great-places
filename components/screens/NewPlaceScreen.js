@@ -31,7 +31,6 @@ const NewPlaceScreen = (props) => {
   const imageTakenHandler = (imagePath) => {
     setSelectedImage(imagePath)
   }
-
   return (
     <ScrollView>
       <View style={styles.form}>
@@ -42,7 +41,7 @@ const NewPlaceScreen = (props) => {
           value={titleValue}
         />
         <ImageSelector onImageTake={imageTakenHandler} />
-        <LocationPicker />
+        <LocationPicker navigation={props.navigation} />
         <Button
           title="Save Place"
           color={Colors.primary}
