@@ -7,7 +7,7 @@ const MapPreview = (props) => {
   let imagePreviewUrl;
 
   if (props.location) {
-    imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.latitude},${props.location.longitude}&zoom=13&size=400x200&maptype=roadmap&markers=color:red%7Clabel:A%7C${props.location.latitude},${props.location.longitude}&key=${ENV.googleApiKey}`;
+    imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.latitude},${props.location.longitude}&zoom=13&size=400x200&maptype=roadmap&markers=color:red%7Clabel:A%7C${props.location.latitude},${props.location.longitude}&key=${ENV().googleApiKey}`;
   }
   return (
     <View style={{ ...styles.mapPreview, ...props.style }}>
