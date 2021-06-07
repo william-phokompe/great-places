@@ -9,7 +9,7 @@ const ImageSelector = (props) => {
   const [pickedImageUri, setPickedImageUri] = useState();
 
   const cameraPermission = async (_) => {
-    const res = await Permissions.askAsync(Permissions.CAMERA);
+    const res = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
 
     if (res.status !== "granted") {
       Alert.alert("Please grant camera permissions", [{ text: "Okay" }]);

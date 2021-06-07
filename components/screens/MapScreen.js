@@ -11,8 +11,15 @@ import MapView, { Marker } from "react-native-maps";
 import Colors from "../../constants/Colors";
 
 const MapScreen = (props) => {
+  const initialLocation = props.navigation.getParam("initialLocation");
+  const readonly = props.navigation.getParam("readonly");
+
   const [selectedLocation, setSelectedLocation] = useState();
+
   const selectLocationHandler = (event) => {
+    if (readonly) {
+      return;
+    }
     setSelectedLocation({
       latitude: event.nativeEvent.coordinate.latitude,
       longitude: event.nativeEvent.coordinate.longitude,
@@ -20,11 +27,13 @@ const MapScreen = (props) => {
   };
 
   const mapRegion = {
-    latitude: 37.78,
-    longitude: -122.43,
+    latitude: initialLocation ? initialLocation.latitude : -26.204550776810912,
+    longitude: initialLocation ? initialLocation.longitude : 28.052283595484475,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
+
+  console.log("MAP REGION:", mapRegion);
 
   let markerCoordinates;
 
@@ -33,6 +42,8 @@ const MapScreen = (props) => {
       latitude: selectedLocation.latitude,
       longitude: selectedLocation.longitude,
     };
+  } else {
+    markerCoordinates = initialLocation;
   }
 
   const saveLocationHandler = useCallback(
@@ -41,7 +52,7 @@ const MapScreen = (props) => {
         Alert.alert(
           "Location missing",
           "Please select a location before proceeding",
-          [{text: 'Okay'}]
+          [{ text: "Okay" }]
         );
         return;
       }
@@ -74,6 +85,9 @@ const MapScreen = (props) => {
 
 MapScreen.navigationOptions = (navigationData) => {
   const saveFunction = navigationData.navigation.getParam("saveLocation");
+  const readonly = navigationData.navigation.getParam("readonly");
+
+  if (readonly) return {};
 
   return {
     headerRight: (

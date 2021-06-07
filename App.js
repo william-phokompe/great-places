@@ -8,9 +8,8 @@ import placesReducer from "./store/reducers/placesReducer";
 import { init } from "./helpers/db";
 
 init()
-  .then((_) => console.log("INIT DB"))
+  .then((_) => {})
   .catch((err) => {
-    console.log("INIT FAILED");
     console.log(err);
   });
 
