@@ -28,7 +28,7 @@ const PlaceListScreen = (props) => {
           }}
           image={itemData.item.image}
           title={itemData.item.title}
-          address={null}
+          address={itemData.item.address}
         />
       )}
     />
