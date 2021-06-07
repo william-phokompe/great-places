@@ -1,9 +1,12 @@
 class Place {
-    constructor(id, title, image) {
-        this.id = id;
-        this.title = title;
-        this.image = image;
-    }
+  constructor(id, title, image, address, latitude, longitude) {
+    this.id = id;
+    this.title = title;
+    this.image = image;
+    this.address = address;
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
 }
 
 export default Place;
