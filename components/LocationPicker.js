@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Button,
@@ -6,7 +6,6 @@ import {
   ActivityIndicator,
   Alert,
   StyleSheet,
-  TouchableOpacity,
 } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -17,6 +16,15 @@ import MapPreview from "./MapPreview";
 const LocationPicker = (props) => {
   const [pickedLocation, setPickedLoaction] = useState();
   const [isFetching, setIsFetching] = useState(false);
+
+  const pickedLocationOnMap = props.navigation.getParam('pickedLocation');
+
+  useEffect(_ => {
+    if (pickedLocationOnMap) {
+      setPickedLoaction(pickedLocationOnMap)
+    }
+  }, [pickedLocationOnMap])
+
   const locationPermission = async (_) => {
     const res = await Permissions.askAsync(Permissions.LOCATION);
 
