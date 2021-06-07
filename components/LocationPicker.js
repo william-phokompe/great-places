@@ -14,16 +14,18 @@ import Colors from "../constants/Colors";
 import MapPreview from "./MapPreview";
 
 const LocationPicker = (props) => {
-  const [pickedLocation, setPickedLoaction] = useState();
+  const [pickedLocation, setPickedLocation] = useState();
   const [isFetching, setIsFetching] = useState(false);
 
   const pickedLocationOnMap = props.navigation.getParam('pickedLocation');
+  const {onLocationPicked} = props;
 
   useEffect(_ => {
     if (pickedLocationOnMap) {
-      setPickedLoaction(pickedLocationOnMap)
+      setPickedLocation(pickedLocationOnMap)
+      onLocationPicked(pickedLocationOnMap)
     }
-  }, [pickedLocationOnMap])
+  }, [pickedLocationOnMap, onLocationPicked])
 
   const locationPermission = async (_) => {
     const res = await Permissions.askAsync(Permissions.LOCATION);
@@ -50,11 +52,14 @@ const LocationPicker = (props) => {
         timeout: 10000,
       });
 
-      setPickedLoaction({
+      setPickedLocation({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       });
-      setIsFetching(false);
+      props.onLocationPicked({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      })
     } catch (error) {
       Alert.alert(
         "Could not fetch location",
@@ -62,6 +67,7 @@ const LocationPicker = (props) => {
         [{ text: "Okay" }]
       );
     }
+    setIsFetching(false);
   };
 
   const selectOnMapHandler = _ => {
